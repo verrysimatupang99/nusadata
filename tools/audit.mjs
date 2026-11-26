@@ -47,6 +47,16 @@ export async function auditRoutesAndControls() {
       console.log(`${route}: ${state.heading.slice(0, 64) || 'rendered'}`);
     }
 
+    // Section navigation itself: click each masthead link rather than only deep-linking.
+    await navigate('#/');
+    for (const routeName of ['economy', 'population', 'prices', 'labour', 'regions', 'indicators', 'releases', 'about', 'home']) {
+      await evaluate(`document.querySelector('[data-route="${routeName}"]').click()`);
+      await delay(420);
+      const navState = await evaluate(`({hash:location.hash,text:document.querySelector('#app')?.textContent?.trim().length||0})`);
+      const expected = routeName === 'home' ? '#/' : `#/${routeName}`;
+      if (navState.hash !== expected || !navState.text) failures.push(`navigation link ${routeName} produced ${navState.hash} with ${navState.text} characters`);
+    }
+
     // Header controls: menu toggles and search navigates to the indicator catalogue.
     await navigate('#/');
     await evaluate(`document.querySelector('#menu-toggle').click(); document.querySelector('#menu-toggle').getAttribute('aria-expanded')`);
