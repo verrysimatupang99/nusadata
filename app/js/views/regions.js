@@ -1,6 +1,5 @@
 import { escapeHtml, formatInteger, formatPercent, formatWholeIdr } from '../format.js';
 import { provinceTileMap } from '../charts/tilemap.js';
-import { horizontalBarChart } from '../charts/bar.js';
 import { provinceMetrics, provinceStatistics, regionsSourceNotes } from '../data/regions.js';
 
 export function renderRegions() {
@@ -11,21 +10,20 @@ export function buildRegionsHtml(state) {
   const metric = provinceMetrics[state.metricIndex];
   const selected = provinceStatistics.find((province) => province.code === state.selectedCode) || provinceStatistics[0];
   const controls = provinceMetrics.map((item, index) => `<button class="control-button" type="button" data-metric-index="${index}" aria-pressed="${index === state.metricIndex}">${escapeHtml(item.label.split(',')[0])}</button>`).join('');
-  const map = provinceTileMap({ provinces: provinceStatistics, metric, width: 900, ariaLabel: `Map of 38 provinces coloured by ${metric.label}` });
+  const map = provinceTileMap({ provinces: provinceStatistics, metric, width: 760, tileW: 42, tileH: 36, gapX: 5, gapY: 14, ariaLabel: `Map of 38 provinces coloured by ${metric.label}` });
   const rows = sortProvinces(state).map((province) => `<tr data-province-row="${escapeHtml(province.code)}" class="${province.code === selected.code ? 'selected-row' : ''}"><td><strong>${escapeHtml(province.name)}</strong><br><small>${escapeHtml(province.capital)} · ${escapeHtml(province.island)}</small></td><td class="num">${province.populationM.toFixed(2)}</td><td class="num">${province.grdpCapitaM.toFixed(1)}</td><td class="num">${province.povertyPct.toFixed(2)}%</td><td class="num">${formatWholeIdr(province.ump2025)}</td></tr>`).join('');
-  const topGrdp = [...provinceStatistics].sort((a, b) => b.grdpCapitaM - a.grdpCapitaM).slice(0, 6);
-  const grdpBars = horizontalBarChart({ items: topGrdp, width: 390, rowHeight: 25, labelWidth: 128, valueFormat: (v) => `Rp${v.toFixed(0)}M`, color: 'var(--navy)', ariaLabel: 'Highest GRDP per capita provinces' });
+  
   return `
     <section class="page-heading"><div><p class="eyebrow">Regions</p><h1>Thirty-eight provinces across the archipelago</h1><p class="lede">A schematic west-to-east tile atlas with population, income and poverty for every province. Select a metric, then click a tile or table row.</p></div><div class="asof">Population mid-2024 · poverty Mar 2025<br>UMP effective 2025</div></section>
     <section class="tilemap-layout">
-      <article class="panel"><header class="panel-header"><div><h2>Archipelago tile atlas</h2><p>Colour: ${escapeHtml(metric.label)}</p></div><div class="tilemap-controls">${controls}</div></header><div class="panel-body">${map}<p class="source-line">${escapeHtml(regionsSourceNotes.population)}; ${escapeHtml(regionsSourceNotes.grdp)}; ${escapeHtml(regionsSourceNotes.poverty)}</p></div></article>
+      <article class="panel"><header class="panel-header"><div><h2>Archipelago tile atlas</h2><p>Colour: ${escapeHtml(metric.label)}</p></div><div class="tilemap-controls">${controls}</div></header><div class="panel-body">${map}<div class="region-strip"><span><strong>West Java</strong> largest population</span><span><strong>DKI Jakarta</strong> highest GRDP per capita</span><span><strong>Highland Papua</strong> highest poverty rate</span></div><p class="source-line">${escapeHtml(regionsSourceNotes.population)}; ${escapeHtml(regionsSourceNotes.grdp)}; ${escapeHtml(regionsSourceNotes.poverty)}</p></div></article>
       <aside class="panel"><header class="panel-header"><div><p class="eyebrow">Province detail</p><h2>${escapeHtml(selected.name)}</h2><p>${escapeHtml(selected.island)} · capital ${escapeHtml(selected.capital)}</p></div></header><div class="panel-body province-detail"><div><div class="fact-label">Population</div><div class="big-number">${selected.populationM.toFixed(2)}m</div></div><dl class="detail-list">
         ${detail('Density', `${formatInteger(selected.populationM * 1000000 / selected.areaKm2)} people/km²`)}
         ${detail('GRDP per capita', `Rp ${selected.grdpCapitaM.toFixed(1)} million`, regionsSourceNotes.grdp)}
         ${detail('Poverty rate', formatPercent(selected.povertyPct), regionsSourceNotes.poverty)}
         ${detail('Minimum wage 2025', formatWholeIdr(selected.ump2025), regionsSourceNotes.ump)}
         ${detail('Land area', `${formatInteger(selected.areaKm2)} km²`, 'BPS regional boundary area, rounded')}
-      </dl><div>${grdpBars}</div></div></aside>
+      </dl></div></aside>
     </section>
     <section class="panel" style="margin-top:12px"><header class="panel-header"><div><h2>Provincial statistical table</h2><p>Click column headings to sort; click a row to inspect the province.</p></div></header><div class="data-table-wrap province-table-wrap"><table class="data-table province-table"><thead><tr>
       ${headerButton('name', 'Province', state)}${headerButton('populationM', 'Population m', state)}${headerButton('grdpCapitaM', 'GRDP/capita Rp m', state)}${headerButton('povertyPct', 'Poverty', state)}${headerButton('ump2025', 'UMP 2025', state)}

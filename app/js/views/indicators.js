@@ -20,16 +20,32 @@ export function buildCatalogHtml(query, category) {
 }
 
 export function mountIndicatorCatalog(root) {
-  const search = root.querySelector('#catalog-search');
-  const category = root.querySelector('#catalog-category');
-  let query = search?.value || '';
-  const repaint = () => { root.innerHTML = buildCatalogHtml(query, category?.value || 'All'); };
-  search?.addEventListener('input', () => { query = search.value; window.clearTimeout(search.timer); search.timer = window.setTimeout(repaint, 180); });
-  category?.addEventListener('change', repaint);
-  root.querySelector('#catalog-reset')?.addEventListener('click', () => { query = ''; root.innerHTML = buildCatalogHtml('', 'All'); });
+  let query = root.querySelector('#catalog-search')?.value || '';
+  let category = root.querySelector('#catalog-category')?.value || 'All';
+  let inputTimer = 0;
+  const repaint = () => { root.innerHTML = buildCatalogHtml(query, category); };
   const open = (id) => { window.location.hash = `#/indicators/${encodeURIComponent(id)}`; };
+  root.addEventListener('input', (event) => {
+    if (event.target?.id !== 'catalog-search') return;
+    query = event.target.value;
+    window.clearTimeout(inputTimer);
+    inputTimer = window.setTimeout(repaint, 180);
+  });
+  root.addEventListener('change', (event) => {
+    if (event.target?.id !== 'catalog-category') return;
+    category = event.target.value;
+    repaint();
+  });
   root.addEventListener('click', (event) => {
-    const row = event.target instanceof Element ? event.target.closest('[data-indicator-id]') : null;
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+    if (target.closest('#catalog-reset')) {
+      query = '';
+      category = 'All';
+      repaint();
+      return;
+    }
+    const row = target.closest('[data-indicator-id]');
     if (row) open(row.getAttribute('data-indicator-id'));
   });
   root.addEventListener('keydown', (event) => {
