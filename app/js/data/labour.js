@@ -9,7 +9,7 @@ export const labourForceSeries = [
   { year: '2015', value: 122.4 }, { year: '2016', value: 125.4 }, { year: '2017', value: 128.1 },
   { year: '2018', value: 131.0 }, { year: '2019', value: 133.6 }, { year: '2020', value: 138.2 },
   { year: '2021', value: 140.2 }, { year: '2022', value: 143.7 }, { year: '2023', value: 146.6 },
-  { year: '2024', value: 149.4 }, { year: 'Feb 25', value: 153.1 },
+  { year: '2024', value: 149.4 }, { year: 'Feb 25', value: 153.1 }, { year: 'Aug 25', value: 154.0 },
 ];
 
 export const employmentBySectorFeb2025 = [
@@ -22,21 +22,22 @@ export const employmentBySectorFeb2025 = [
   { label: 'Other services', value: 5.1, color: '#8a8790' },
 ];
 
-export const employmentFormalityFeb2025 = [
-  { label: 'Informal employment', value: 58.3, color: '#a51f2d' },
-  { label: 'Formal employment', value: 41.7, color: '#244e79' },
+export const employmentFormalityAug2025 = [
+  { label: 'Informal employment', value: 57.8, color: '#a51f2d' },
+  { label: 'Formal employment', value: 42.2, color: '#244e79' },
 ];
 
 export const labourKeyFacts = {
-  unemploymentRate: 4.76,
-  labourForceM: 153.05,
-  employedM: 145.77,
-  unemployedM: 7.28,
-  participationRate: 69.5,
+  period: 'Aug 2025',
+  unemploymentRate: 4.85,
+  labourForceM: 154.00,
+  employedM: 146.54,
+  unemployedM: 7.46,
+  participationRate: 70.59,
   youthUnemployment: 16.1,
-  averageWageIdrM: 3.09,
-  informalShare: 58.3,
-  source: 'BPS Sakernas labour force release, Feb 2025 (published 5 May 2025)',
+  averageWageIdrM: 3.33,
+  informalShare: 57.8,
+  source: 'BPS Sakernas labour force release, Aug 2025 (published 5 Nov 2025)',
 };
 
 export const minimumWageLeaders2025 = [
@@ -51,6 +52,6 @@ export const minimumWageLeaders2025 = [
 ];
 
 export const labourNotes = {
-  wageBasis: 'Average monthly wage of employees, Sakernas Feb 2025',
+  wageBasis: 'Average monthly wage of employees, Sakernas Aug 2025',
   umpBasis: 'Provincial minimum wages under Minister of Manpower Regulation No. 16 of 2024',
 };

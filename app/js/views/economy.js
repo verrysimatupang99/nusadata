@@ -2,7 +2,8 @@ import { escapeHtml, formatBillionUsd, formatPercent, formatTrillionIdr } from '
 import { lineChart } from '../charts/line.js';
 import { horizontalBarChart, verticalGroupedBarChart } from '../charts/bar.js';
 import { donutChart } from '../charts/donut.js';
-import { annualRealGdpGrowth, budgetSummary, expenditureComposition2024, fxReservesSeries, gdpPerCapitaSeries, latestEconomy, quarterlyRealGdpGrowth, sectorComposition2024, topExportCommodities2024, tradeBalanceSeries } from '../data/economy.js';
+import { annualRealGdpGrowth, budgetSummary, expenditureComposition2024, fxReservesSeries, gdpPerCapitaSeries, latestEconomy, quarterlyRealGdpGrowth, sectorComposition2024 } from '../data/economy.js';
+import { exportCommodities2024 as topExportCommodities2024, goodsTradeAnnual as tradeBalanceSeries } from '../data/trade.js';
 
 export function renderEconomy() {
   const annual = lineChart({

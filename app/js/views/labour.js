@@ -2,7 +2,7 @@ import { escapeHtml, formatMillionIdr, formatPercent, formatWholeIdr } from '../
 import { lineChart } from '../charts/line.js';
 import { horizontalBarChart } from '../charts/bar.js';
 import { donutChart } from '../charts/donut.js';
-import { employmentBySectorFeb2025, employmentFormalityFeb2025, labourForceSeries, labourKeyFacts, minimumWageLeaders2025, unemploymentSeries } from '../data/labour.js';
+import { employmentBySectorFeb2025, employmentFormalityAug2025, labourForceSeries, labourKeyFacts, minimumWageLeaders2025, unemploymentSeries } from '../data/labour.js';
 import { provinceStatistics } from '../data/regions.js';
 
 export function renderLabour() {
@@ -17,7 +17,7 @@ export function renderLabour() {
     width: 560, height: 225, area: true, yLabel: 'million people', valueFormat: (v) => `${v.toFixed(1)} million`, ariaLabel: 'Labour force size',
   });
   const sectorDonut = donutChart({ items: employmentBySectorFeb2025, width: 530, height: 285, centerLabel: 'Employment', ariaLabel: 'Employment by sector, February 2025' });
-  const formality = donutChart({ items: employmentFormalityFeb2025, width: 500, height: 235, centerLabel: 'Formality', ariaLabel: 'Formal and informal employment shares' });
+  const formality = donutChart({ items: employmentFormalityAug2025, width: 500, height: 235, centerLabel: 'Formality', ariaLabel: 'Formal and informal employment shares' });
   const wageItems = minimumWageLeaders2025.map((row) => ({ ...row, color: row.value > 4000000 ? '#a51f2d' : '#244e79' }));
   const wages = horizontalBarChart({
     items: wageItems,
@@ -26,20 +26,20 @@ export function renderLabour() {
   const lowestUmp = [...provinceStatistics].sort((a, b) => a.ump2025 - b.ump2025)[0];
   const highestUmp = [...provinceStatistics].sort((a, b) => b.ump2025 - a.ump2025)[0];
   const html = `
-    <section class="page-heading"><div><p class="eyebrow">Labour</p><h1>Unemployment is low, informality is the deeper problem</h1><p class="lede">Sakernas counted 153.05 million people in the labour force in February 2025. The headline unemployment rate was 4.76%, while most work remained informal.</p></div><div class="asof">Sakernas reference: Feb 2025<br>Published 5 May 2025</div></section>
+    <section class="page-heading"><div><p class="eyebrow">Labour</p><h1>Unemployment is low, informality is the deeper problem</h1><p class="lede">Sakernas counted 154.00 million people in the labour force in August 2025. The headline unemployment rate was 4.85%, while most work remained informal.</p></div><div class="asof">Sakernas reference: Aug 2025<br>Published 5 Nov 2025</div></section>
     <section class="figure-row">
       ${fact('Unemployment rate', `${labourKeyFacts.unemploymentRate.toFixed(2)}%`, labourKeyFacts.source)}
       ${fact('Labour force', `${labourKeyFacts.labourForceM.toFixed(2)} million`, labourKeyFacts.source)}
       ${fact('Employed people', `${labourKeyFacts.employedM.toFixed(2)} million`, labourKeyFacts.source)}
-      ${fact('Average employee wage', formatMillionIdr(labourKeyFacts.averageWageIdrM), 'per month · BPS Sakernas, Feb 2025')}
+      ${fact('Average employee wage', formatMillionIdr(labourKeyFacts.averageWageIdrM), 'per month · BPS Sakernas, Aug 2025')}
     </section>
     <section class="two-col" style="margin-top:12px">
-      ${panel('Unemployment trend', 'Open unemployment rate, August series except latest February point', unemployment, 'BPS Sakernas, 2015–Feb 2025')}
+      ${panel('Unemployment trend', 'Open unemployment rate, annual August series with 2025 survey points', unemployment, 'BPS Sakernas, 2015–Aug 2025')}
       ${panel('Labour force growth', 'People working or available for work', labourForce, 'BPS Sakernas, rounded series')}
     </section>
     <section class="two-col" style="margin-top:12px">
       ${panel('Employment by sector', 'Shares of employed people, Feb 2025', sectorDonut, 'BPS Sakernas, Feb 2025; rounded shares')}
-      ${panel('Formality split', 'Formal versus informal work, Feb 2025', formality, 'BPS Sakernas, Feb 2025')}
+      ${panel('Formality split', 'Formal versus informal work, Aug 2025', formality, 'BPS Sakernas, Aug 2025')}
     </section>
     <section class="panel" style="margin-top:12px"><header class="panel-header"><div><h2>Provincial minimum wages, 2025</h2><p>The highest and lowest ends of the 38-province UMP distribution.</p></div><a href="#/regions">Compare provinces</a></header><div class="panel-body">${wages}<p class="source-line">Minister of Manpower Regulation No. 16 of 2024; UMP values effective 2025</p></div></section>
     <section class="three-col" style="margin-top:12px">

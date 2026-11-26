@@ -4,8 +4,10 @@ export function renderAbout() {
   const sources = [
     ['BPS–Statistics Indonesia, quarterly GDP release', 'Q3 2025, published 5 Nov 2025', 'GDP level, growth, sectoral and regional shares'],
     ['BPS–Statistics Indonesia, CPI releases', 'monthly through Oct 2025', 'headline, core, volatile food, administered and expenditure-group inflation'],
-    ['BPS–Statistics Indonesia, Sakernas labour force release', 'Feb 2025, published 5 May 2025', 'labour force, employment, unemployment, wages and formality'],
+    ['BPS–Statistics Indonesia, Sakernas labour force release', 'Aug 2025, published 5 Nov 2025', 'labour force, employment, unemployment, wages and formality'],
     ['BPS–Statistics Indonesia, Profile of Poverty in Indonesia', 'Susenas Mar 2025, published 25 Jul 2025', 'poverty rate, poor population, poverty line and provincial poverty'],
+    ['BPS–Statistics Indonesia, foreign trade statistics', '2024 annual goods trade', 'exports, imports, commodities, partners and trade balance'],
+    ['BPS–Statistics Indonesia, International Visitor Arrivals Statistics', '2024 publication plus monthly releases through Sep 2025', 'visitor arrivals, source countries, entry points and tourism recovery'],
     ['BPS–Statistics Indonesia, population projections', 'mid-year 2025 and provincial 2024', 'population, age structure, provinces and projection points'],
     ['Bank Indonesia', 'policy and reserve releases through Nov 2025', 'BI policy rate, official reserve assets, balance of payments'],
     ['Ministry of Finance', 'APBN KiTa Jan 2025 and APBN 2025 posture', 'revenue, expenditure and deficit'],

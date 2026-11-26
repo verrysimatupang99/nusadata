@@ -39,6 +39,19 @@ export const provinceStatistics = [
   { code: 'PG', short: 'PG', name: 'Highland Papua', capital: 'Jayawijaya', island: 'Papua', mapX: 15, mapY: 2, populationM: 1.467, areaKm2: 51213, grdpCapitaM: 39.0, povertyPct: 30.03, ump2025: 4285847 },
 ];
 
+export const largestProvincialEconomies2024 = [
+  { code: 'JK', name: 'DKI Jakarta', grdpT: 3679.36, sharePct: 16.71 },
+  { code: 'JI', name: 'East Java', grdpT: 3168.30, sharePct: 14.39 },
+  { code: 'JB', name: 'West Java', grdpT: 2823.34, sharePct: 12.82 },
+  { code: 'JT', name: 'Central Java', grdpT: 1817.78, sharePct: 8.25 },
+  { code: 'SU', name: 'North Sumatra', grdpT: 1146.92, sharePct: 5.21 },
+  { code: 'RI', name: 'Riau', grdpT: 1112.48, sharePct: 5.05 },
+  { code: 'BT', name: 'Banten', grdpT: 873.63, sharePct: 3.97 },
+  { code: 'KI', name: 'East Kalimantan', grdpT: 858.43, sharePct: 3.90 },
+  { code: 'SN', name: 'South Sulawesi', grdpT: 696.25, sharePct: 3.16 },
+  { code: 'SS', name: 'South Sumatra', grdpT: 663.96, sharePct: 3.02 },
+];
+
 export const provinceMetrics = [
   { key: 'grdpCapitaM', label: 'GRDP per capita, 2024', shortFormat: (value) => `Rp${value.toFixed(0)}M`, format: (value) => `Rp ${value.toFixed(1)} million`, negativeGood: false },
   { key: 'populationM', label: 'Population, mid-2024', shortFormat: (value) => `${value.toFixed(1)}m`, format: (value) => `${value.toFixed(2)} million people`, negativeGood: false },
@@ -48,6 +61,7 @@ export const provinceMetrics = [
 export const regionsSourceNotes = {
   population: 'BPS mid-year provincial population estimates, 2024; rounded to thousands',
   grdp: 'BPS provincial gross regional domestic product at current prices, 2024; rounded',
+  grdpTotal: 'BPS provincial gross regional domestic product at current market prices, 2024',
   poverty: 'BPS Profile of Poverty in Indonesia, Susenas March 2025',
   ump: 'Minister of Manpower Regulation No. 16 of 2024; provincial minimum wages for 2025',
 };

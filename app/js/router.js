@@ -3,6 +3,7 @@ import { escapeHtml } from './format.js';
 const viewLoaders = {
   home: () => import('./views/dashboard.js'),
   economy: () => import('./views/economy.js'),
+  trade: () => import('./views/trade.js'),
   population: () => import('./views/population.js'),
   prices: () => import('./views/prices.js'),
   labour: () => import('./views/labour.js'),
@@ -16,6 +17,7 @@ const viewLoaders = {
 const rendererNames = {
   home: 'renderDashboard',
   economy: 'renderEconomy',
+  trade: 'renderTrade',
   population: 'renderPopulation',
   prices: 'renderPrices',
   labour: 'renderLabour',

@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 
 const root = resolve(new URL('..', import.meta.url).pathname);
 const appRoot = join(root, 'app');
-const routes = ['#/', '#/economy', '#/population', '#/prices', '#/labour', '#/regions', '#/indicators', '#/indicators/real-gdp-growth', '#/releases', '#/about', '#/definitely-not-a-route'];
+const routes = ['#/', '#/economy', '#/trade', '#/population', '#/prices', '#/labour', '#/regions', '#/indicators', '#/indicators/real-gdp-growth', '#/releases', '#/about', '#/definitely-not-a-route'];
 
 export async function auditRoutesAndControls() {
   const server = await startStaticServer(appRoot);
@@ -49,7 +49,7 @@ export async function auditRoutesAndControls() {
 
     // Section navigation itself: click each masthead link rather than only deep-linking.
     await navigate('#/');
-    for (const routeName of ['economy', 'population', 'prices', 'labour', 'regions', 'indicators', 'releases', 'about', 'home']) {
+    for (const routeName of ['economy', 'trade', 'population', 'prices', 'labour', 'regions', 'indicators', 'releases', 'about', 'home']) {
       await evaluate(`document.querySelector('[data-route="${routeName}"]').click()`);
       await delay(420);
       const navState = await evaluate(`({hash:location.hash,text:document.querySelector('#app')?.textContent?.trim().length||0})`);
