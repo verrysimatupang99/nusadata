@@ -97,6 +97,20 @@ export async function auditRoutesAndControls() {
     const detailHash = await evaluate('location.hash');
     if (!detailHash.includes('poverty-rate')) failures.push(`indicator row did not open detail: ${detailHash}`);
 
+    // Phone density: the shell must not create horizontal page overflow, and the menu must open.
+    await cdp.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }, sessionId);
+    for (const hash of ['#/', '#/trade', '#/regions']) {
+      await navigate(hash);
+      const mobile = await evaluate(`({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,text:document.body.innerText.length})`);
+      if (mobile.scrollWidth > mobile.width + 1) failures.push(`${hash}: mobile horizontal overflow ${mobile.scrollWidth}px in ${mobile.width}px viewport`);
+    }
+    await evaluate(`document.querySelector('#site-nav').classList.remove('nav-open'); document.querySelector('#menu-toggle').setAttribute('aria-expanded','false')`);
+    await evaluate(`document.querySelector('#menu-toggle').click()`);
+    await delay(180);
+    const navState = await evaluate(`({display:getComputedStyle(document.querySelector('#site-nav')).display,height:document.querySelector('#site-nav').getBoundingClientRect().height,open:document.querySelector('#site-nav').className,expanded:document.querySelector('#menu-toggle').getAttribute('aria-expanded'),viewport:innerWidth})`);
+    const navVisible = navState.display !== 'none' && navState.height > 20;
+    if (!navVisible) failures.push(`mobile menu did not reveal navigation: ${JSON.stringify(navState)}`);
+
     if (errors.length) failures.push(`browser errors remain: ${[...new Set(errors)].join(' | ')}`);
     await cdp.send('Target.closeTarget', { targetId });
   } finally {

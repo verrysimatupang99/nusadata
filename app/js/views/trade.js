@@ -12,18 +12,18 @@ export function renderTrade() {
       { name: 'Exports', color: '#244e79', values: goodsTradeAnnual.map((row) => row.exports) },
       { name: 'Imports', color: '#a51f2d', values: goodsTradeAnnual.map((row) => row.imports) },
     ],
-    width: 700, height: 292, valueFormat: (value) => formatBillionUsd(value), ariaLabel: 'Indonesia exports and imports of goods, 2015 to 2024',
+    width: 700, height: 245, valueFormat: (value) => formatBillionUsd(value), ariaLabel: 'Indonesia exports and imports of goods, 2015 to 2024',
   });
   const balanceChart = lineChart({
     labels: goodsTradeAnnual.map((row) => row.year),
     series: [{ name: 'Goods balance', color: '#667f5c', values: goodsTradeAnnual.map(tradeBalance) }],
-    width: 390, height: 164, area: true, xEvery: 2, dense: true, yLabel: 'US$ billion',
+    width: 390, height: 126, area: true, xEvery: 2, yLabel: 'US$ billion',
     valueFormat: (value) => `${value >= 0 ? '+' : ''}${formatBillionUsd(value)}`, ariaLabel: 'Goods trade balance, 2015 to 2024',
   });
   const arrivalsChart = lineChart({
     labels: internationalArrivalsAnnual.map((row) => row.year),
     series: [{ name: 'International visitor arrivals', color: '#ad7c24', values: internationalArrivalsAnnual.map((row) => row.visitsM) }],
-    width: 390, height: 164, area: true, xEvery: 2, dense: true, yLabel: 'million visits',
+    width: 390, height: 126, area: true, xEvery: 2, yLabel: 'million visits',
     valueFormat: (value) => `${formatNumber(value, 1)}M`, ariaLabel: 'International visitor arrivals, 2015 to 2024',
   });
   const commodities = horizontalBarChart({
@@ -48,7 +48,7 @@ export function renderTrade() {
   }).join('');
   const progressPct = Math.min(100, tourism2025.arrivalsJanSepM / tourism2025.targetUpperM * 100);
   const html = `
-    <section class="page-heading"><div><p class="eyebrow">Trade and tourism</p><h1>Commodity surpluses pay for an import-heavy industrial economy</h1><p class="lede">Goods exports reached US$264.7 billion in 2024, while tourism continued its post-pandemic recovery toward the government's 14.6–16 million visitor target range for 2025.</p></div><div class="asof">Trade year: 2024<br>Tourism data through Sep 2025</div></section>
+    <section class="page-heading"><div><p class="eyebrow">Trade and tourism</p><h1>Trade surpluses and the tourism recovery</h1><p class="lede">Goods exports reached US$264.7 billion in 2024, while tourism continued its post-pandemic recovery toward the government's 14.6–16 million visitor target range for 2025.</p></div><div class="asof">Trade year: 2024<br>Tourism data through Sep 2025</div></section>
     <section class="figure-row">
       ${fact('Exports of goods', formatBillionUsd(latest.exports), '2024 · BPS foreign trade')}
       ${fact('Imports of goods', formatBillionUsd(latest.imports), '2024 · BPS foreign trade')}
