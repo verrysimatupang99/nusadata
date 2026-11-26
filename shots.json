@@ -1,0 +1,6 @@
+[
+  { "file": "1-cover-dashboard.jpg", "path": "#/", "viewport": { "width": 1280, "height": 800 }, "wait": 1300 },
+  { "file": "2-economy.jpg", "path": "#/economy", "viewport": { "width": 1280, "height": 800 }, "wait": 1100 },
+  { "file": "3-regions.jpg", "path": "#/regions", "viewport": { "width": 1280, "height": 800 }, "wait": 1100 },
+  { "file": "4-phone.jpg", "path": "#/", "viewport": { "width": 390, "height": 844 }, "wait": 1300 }
+]

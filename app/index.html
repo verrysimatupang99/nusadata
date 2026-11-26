@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NusaData — Indonesia in numbers. A static national statistics portal with sourced figures, charts, provinces and release calendars.">
+  <title>NusaData — Indonesia in numbers</title>
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to statistics</a>
+  <header class="site-masthead" id="site-masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="#/" aria-label="NusaData home">
+        <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+          <rect x="3" y="3" width="38" height="38" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M10 30V15l12 15V15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/>
+          <path d="M27 30h7M27 22h7M27 14h7" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+        </svg>
+        <span class="brand-copy">
+          <strong>NusaData</strong>
+          <small>Indonesia in numbers</small>
+        </span>
+      </a>
+      <div class="masthead-dateline" aria-label="Latest statistical release">
+        <span>Republic of Indonesia · national statistics portal</span>
+        <strong>Latest release: CPI inflation, October 2025</strong>
+      </div>
+      <form class="site-search" id="site-search" role="search" action="#/indicators">
+        <label class="visually-hidden" for="global-search">Search the indicator catalogue</label>
+        <input id="global-search" name="q" type="search" autocomplete="off" placeholder="Find an indicator">
+        <button type="submit">Search</button>
+      </form>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>
+        <span>Menu</span>
+      </button>
+    </div>
+    <nav class="site-nav" id="site-nav" aria-label="Statistics sections">
+      <a href="#/" data-route="home">Dashboard</a>
+      <a href="#/economy" data-route="economy">Economy</a>
+      <a href="#/population" data-route="population">Population</a>
+      <a href="#/prices" data-route="prices">Prices</a>
+      <a href="#/labour" data-route="labour">Labour</a>
+      <a href="#/regions" data-route="regions">Regions</a>
+      <a href="#/indicators" data-route="indicators">Indicators</a>
+      <a href="#/releases" data-route="releases">Releases</a>
+      <a href="#/about" data-route="about">About</a>
+    </nav>
+  </header>
+
+  <main class="app-shell" id="main-content" tabindex="-1">
+    <div id="app" class="route-outlet" aria-live="polite">
+      <section class="loading-panel" aria-label="Loading">
+        <p class="eyebrow">NusaData</p>
+        <h1>Reading the statistical record…</h1>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>NusaData</strong> is an independent static reference work. Figures are compiled from BPS–Statistics Indonesia, Bank Indonesia, the Ministry of Finance and World Bank WDI publications; the source and reference year appear beside each number.
+    </div>
+    <div class="footer-note">Rounded values are marked as rounded. Nothing on this page is fetched at view time.</div>
+  </footer>
+  <div class="chart-tooltip" id="chart-tooltip" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
